@@ -5,8 +5,13 @@
 #include "marker_mapper_exports.h"
 #include <set>
 #include <map>
+#include <string>
 #include <cstdint>
 #include<functional>
+#include <fstream>  
+
+using namespace std;
+
 namespace aruco_mm{
 
 /**
@@ -17,6 +22,19 @@ struct MARKERMAPPER_API arucoMarkerSet: public std::vector<aruco::Marker>{
 
     arucoMarkerSet(){}
     arucoMarkerSet(const std::vector<aruco::Marker> &ms):std::vector<aruco::Marker>(ms){}
+
+	void load(const string & filename) {
+		throw("");
+	}
+
+	void save(const string & filename) const {
+		for (int i = 0; i < this->size(); i++) {
+			auto fileOut = ofstream(filename + "-" + to_string(i) + ".bin", ofstream::binary);
+			const auto & marker = this->at(i);
+			marker.toStream(fileOut);
+			fileOut.close();
+		}
+	}
 
     bool is(uint32_t id){
         for(auto &m:*this) if (m.id==int(id)) return true;

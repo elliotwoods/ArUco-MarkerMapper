@@ -5,6 +5,7 @@
 #include <Eigen/Geometry>
 #include <opencv2/calib3d/calib3d.hpp>
 #include <opencv2/highgui/highgui.hpp>
+#include <opencv2/imgproc.hpp>
 #include <unordered_set>
 #include <iomanip>
 #include <fstream>
@@ -14,13 +15,31 @@
 #include "mappers/globalgraph_markermapper.h"
 #include "aruco/aruco.h"
 #include "aruco/markerlabeler.h"
+#include "multicropdetect.h"
+
 namespace aruco_mm{
 using namespace std;
 
-bool MarkerMapper::process(const cv::Mat &image, int frame_idx  , bool forceConnectedComponent) {
+bool MarkerMapper::process(const cv::Mat &image, int frame_idx, const string & cacheFilename, bool forceConnectedComponent) {
     markermapper_debug_msg ( "####start "<<frame_idx,5 );
     arucoMarkerSet markers;
-    _mdetector.detect ( image,markers );
+
+	//try to load the markers
+	try {
+		markers.load(cacheFilename);
+	}
+	catch (...) {
+		markers = findMarkersMultiCrop(_mdetector, image, 4, 0.5f);
+
+		auto preview = drawMarkers(image, markers);
+		cv::resize(preview, preview, cv::Size(1920, 1920 * image.rows / image.cols));
+
+		cv::imshow("preview", preview);
+		cv::waitKey(10);
+
+		cout << endl;
+		//markers.save(cacheFilename);
+	}
 
 
    // if (markers.size()<2)return;

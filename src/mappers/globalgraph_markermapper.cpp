@@ -190,8 +190,8 @@ void GlobalGraphMarkerMapper::optimize_impl (   ) {
 
     params.fixedMarkers={uint32_t(_originMarkerId)};
     params.max_iters=100;
-    params.min_error=0.5;
-    params.min_step_error=0.05;
+    params.min_error=0.05;
+    params.min_step_error=0.005;
     params.verbose=true;
     params.fix_camera_params=!_optimizeCameraIntrinsics;
 
