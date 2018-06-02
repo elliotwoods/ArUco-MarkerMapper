@@ -1,0 +1,23 @@
+1.0.12
+- Error in utils using debug removed
+- Bug corrected in mapper_from_images in setting the refence by command line arguments
+1.0.9
+- Added auto_orient option to the mapper_from_images. It will automatically orient the images so that width>height
+- Now in mapper_from_images you must provide a directory as first option. This is better in windows systems
+
+1.0.8
+- Adapted for aruco 3.0.0
+1.0.7
+- Adapted for detached optimization
+1.0.6
+- Adapted for android compilation
+1.0.5
+- Compilation error solved for MSVC
+- Added mapper_view to see in 3D the model created
+
+1.0.4
+- Adapted to Aruco3
+- Speeded Up computation
+1.0.3
+ warnings removed
+

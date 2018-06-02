@@ -1,0 +1,7 @@
+Para Vsfm
+a) obtaner el marker mapper
+b) generate_vsfm_data
+c) run VisualSFM
+d) create the log (evaluate_vsfm_file)
+e) compare logs with ground truth
+
