@@ -61,8 +61,8 @@ private:
     //debug
     void map_toStream(std::map<uint32_t,uint32_t> &t,std::ostream &str );
     void map_fromStream(std::map<uint32_t,uint32_t> &t,std::istream &str );
-    void debug_save(std::string fp,StgMatrix<se3> &poseGraph, graph::Graph<int> &cost_graph,std::map<uint32_t,uint32_t>   &markers_id_pos,std::map<uint32_t,uint32_t>   &markers_pos_id)throw (std::exception);
-    bool debug_read(std::string fp,StgMatrix<se3> &poseGraph, graph::Graph<int> &cost_graph,std::map<uint32_t,uint32_t>   &markers_id_pos,std::map<uint32_t,uint32_t>   &markers_pos_id)throw (std::exception);
+    void debug_save(std::string fp,StgMatrix<se3> &poseGraph, graph::Graph<int> &cost_graph,std::map<uint32_t,uint32_t>   &markers_id_pos,std::map<uint32_t,uint32_t>   &markers_pos_id);
+    bool debug_read(std::string fp,StgMatrix<se3> &poseGraph, graph::Graph<int> &cost_graph,std::map<uint32_t,uint32_t>   &markers_id_pos,std::map<uint32_t,uint32_t>   &markers_pos_id);
 
     int min_num_edges_between_nodes=1;
 

@@ -30,7 +30,7 @@ public:
     //Currently: global_graph
     static std::vector <std::string> getAvailableMarkerMappers( ) { return {"global_graph"};}
     //Returns the mapper with the name indicated. If not specified returns "global_graph"
-    static std::shared_ptr< MarkerMapper> create(std::string name="")throw (std::exception);
+    static std::shared_ptr< MarkerMapper> create(std::string name="");
 
     /**
      * @brief setParams  sets the important params
@@ -61,12 +61,12 @@ public:
      * @param fpath
      * @param addViewLocations whether to add or not the camera locations
      */
-    void saveToPcd(std::string fpath,bool addViewLocations=false)throw(std::exception);//saves the MarkerSet to pcd
+    void saveToPcd(std::string fpath,bool addViewLocations=false);//saves the MarkerSet to pcd
     //saves in binary format for later use
     void saveToFile ( std::string fname ) ;
 
     //save the set of poses to a file with tum rgbd format
-    void saveFrameSetPosesToFile(std::string filepath )throw(std::exception);
+    void saveFrameSetPosesToFile(std::string filepath );
 
 
     //returns the markermap that can be used with aruco library for tracking

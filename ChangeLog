@@ -1,3 +1,7 @@
+1.0.15:
+- Solved compilation problem in opencv 4.x
+1.0.14:
+- Solved compilation problem in IPPE
 1.0.12
 - Error in utils using debug removed
 - Bug corrected in mapper_from_images in setting the refence by command line arguments

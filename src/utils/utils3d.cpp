@@ -141,7 +141,7 @@ std::vector<cv::Vec4f>  getCameraPoints(const cv::Mat &rt_c2g,float size){
 }
 
 
-void  savePCDFile(string fpath, const MarkerSet &ms, int origin)throw(std::exception) {
+void  savePCDFile(string fpath, const MarkerSet &ms, int origin) {
     (void)origin;
     std::vector<cv::Vec4f> points2write;
     for(auto m:ms)
@@ -167,7 +167,7 @@ void  savePCDFile(string fpath, const MarkerSet &ms, int origin)throw(std::excep
 
 }
 
-void savePCDFile(string fpath,const MarkerSet &ms, const vector<cv::Mat >  &vector_rt_c2g,int org_id )throw(std::exception) {
+void savePCDFile(string fpath,const MarkerSet &ms, const vector<cv::Mat >  &vector_rt_c2g,int org_id ) {
     std::vector<cv::Vec4f> points2write;
     float max_msize=-1;
     for(auto m:ms)
@@ -200,7 +200,7 @@ void savePCDFile(string fpath,const MarkerSet &ms, const vector<cv::Mat >  &vect
 
 }
 
-void savePCDFile(string fpath,const MarkerSet &ms, const FrameSet &fset,int org_id,bool writeFrameIds,cv::Scalar marker_color,cv::Scalar frame_color)throw(std::exception) {
+void savePCDFile(string fpath,const MarkerSet &ms, const FrameSet &fset,int org_id,bool writeFrameIds,cv::Scalar marker_color,cv::Scalar frame_color) {
     std::vector<cv::Vec4f> points2write;
     float max_msize=-1;
     for(auto m:ms)

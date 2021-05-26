@@ -62,8 +62,8 @@ public:
     void setParams(const aruco::CameraParameters &cp,double msize){_cam_params=cp;_markerSize=msize;}
     void process(const cv::Mat &img,uint32_t frame_idx);
 
-    void saveToFile(std::string path)throw(std::exception);
-    void readFromFile(std::string path)throw(std::exception);
+    void saveToFile(std::string path);
+    void readFromFile(std::string path);
     FrameSet _frameSet;
     aruco::CameraParameters _cam_params;
     aruco::MarkerDetector _mdetector;

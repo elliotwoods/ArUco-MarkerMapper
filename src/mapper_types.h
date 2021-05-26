@@ -5,13 +5,8 @@
 #include "marker_mapper_exports.h"
 #include <set>
 #include <map>
-#include <string>
 #include <cstdint>
 #include<functional>
-#include <fstream>  
-
-using namespace std;
-
 namespace aruco_mm{
 
 /**
@@ -22,49 +17,6 @@ struct MARKERMAPPER_API arucoMarkerSet: public std::vector<aruco::Marker>{
 
     arucoMarkerSet(){}
     arucoMarkerSet(const std::vector<aruco::Marker> &ms):std::vector<aruco::Marker>(ms){}
-
-	void load(const string & filename) {
-		cv::FileStorage file;
-		if (!file.open(filename, cv::FileStorage::READ)) {
-			throw(cv::Exception());
-		}
-
-		if (!file.isOpened()) {
-			throw(cv::Exception());
-		}
-
-		this->clear();
-
-		cv::FileNode markers = file["markers"];
-		if (markers.empty()) {
-			throw(cv::Exception());
-		}
-
-		for (auto it : markers) {
-			aruco::Marker marker;
-			it["id"] >> marker.id;
-			it["corners"] >> (vector<cv::Point2f> &) marker;
-
-			this->push_back(marker);
-		}
-	}
-
-	void save(const string & filename) const {
-		cv::FileStorage file(filename, cv::FileStorage::WRITE);
-		file << "markers" << "[";
-
-		for (int i = 0; i < this->size(); i++) {
-			const auto & marker = this->at(i);
-
-			file << "{:";
-			file << "id" << marker.id;
-			file << "corners" << (const vector<cv::Point2f> &) marker;
-			file << "}";
-		}
-
-		file << "]";
-		file.release();
-	}
 
     bool is(uint32_t id){
         for(auto &m:*this) if (m.id==int(id)) return true;
@@ -89,7 +41,7 @@ struct MARKERMAPPER_API arucoMarkerSet: public std::vector<aruco::Marker>{
         for(auto id:ids) if ( !is(id) ) return false;
         return true;
     }
-    aruco::Marker &get(int id)throw(std::exception){
+    aruco::Marker &get(int id){
         for(auto &m:*this)  if (m.id==id) return m;
         throw std::runtime_error("could not found the marrker in the set");
     }
@@ -181,16 +133,22 @@ struct MARKERMAPPER_API IoHelper{
 
 //IMPORTANT TYPEDEFS
 //A set of frames
-typedef std::map<uint32_t,FrameInfo>  FrameSet;
+class  MARKERMAPPER_API FrameSet: public std::map<uint32_t,FrameInfo>  {
+
+public:
+    FrameSet(){}
+    void saveToFile(std::string fp);
+    void readFromFile(std::string fp);
+};
 //A set of markers
 class  MARKERMAPPER_API MarkerSet:public std::map<uint32_t,MarkerInfo>{
 
 public:
-    void saveToFile(std::string fp)throw (std::exception);
-    void readFromFile(std::string fp)throw (std::exception);
+    void saveToFile(std::string fp);
+    void readFromFile(std::string fp);
 
-    void saveToStream(std::ostream &fp)throw (std::exception);
-    void readFromStream(std::istream & fp)throw (std::exception);
+    void saveToStream(std::ostream &fp);
+    void readFromStream(std::istream & fp);
 
 
 };

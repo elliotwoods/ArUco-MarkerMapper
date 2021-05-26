@@ -2,13 +2,12 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/opencv_modules.hpp>
-#include <aruco/cameraparameters.h>
-#include <aruco/dictionary.h>
+#include <aruco.h>
 #include "debug.h"
 #include "markermapper.h"
 #include "sglviewer.h"
 #if WIN32
-#include <win_dirent.h>
+#include "win_dirent.h"
 #else
 #include <dirent.h>
 #endif
@@ -47,7 +46,7 @@ cv::Mat drawMarkers(cv::Mat image, const vector<aruco::Marker> & markers) {
 	}
 
 	cv::Mat imageWithMarkings;
-	cv::cvtColor(image, imageWithMarkings, CV_GRAY2RGB);
+	cv::cvtColor(image, imageWithMarkings, cv::COLOR_GRAY2RGB);
 	cv::polylines(imageWithMarkings, lines, true, cv::Scalar(255, 0, 0, 255), 2);
 
 	return imageWithMarkings;
@@ -158,7 +157,7 @@ vector<aruco::Marker> findMarkersMultiCrop(aruco::MarkerDetector & markerDetecto
 			, marker
 			, winSize
 			, cv::Size(-1, -1)
-			, cv::TermCriteria(CV_TERMCRIT_ITER + CV_TERMCRIT_EPS, 50, 1e-6));
+			, cv::TermCriteria(cv::TermCriteria::MAX_ITER + cv::TermCriteria::EPS, 50, 1e-6));
 	}
 
 	return markerVector;
@@ -229,7 +228,7 @@ int main(int argc, char **argv) {
 			//            }
 
 			if (image.channels() != 1) {
-				cv::cvtColor(image, image, CV_RGB2GRAY);
+				cv::cvtColor(image, image, cv::COLOR_RGB2GRAY);
 			}
 
 			auto markers = findMarkersMultiCrop(detector

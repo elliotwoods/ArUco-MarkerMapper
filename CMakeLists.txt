@@ -3,7 +3,7 @@
 # ----------------------------------------------------------------------------
 cmake_minimum_required(VERSION 3.0)
 
-project(marker_mapper VERSION "1.0.12" LANGUAGES CXX)
+project(marker_mapper VERSION "1.0.14" LANGUAGES CXX)
 
 set(PROJECT_SOVERSION "${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}")
 SET(PROJECT_DLLVERSION "${PROJECT_VERSION_MAJOR}${PROJECT_VERSION_MINOR}${PROJECT_VERSION_PATCH}")
@@ -45,13 +45,20 @@ OPTION(USE_OWN_EIGEN3	"Set to OFF to use a standard eigen3 version" ON)
 OPTION(BUILD_UTILS	"Set to OFF to not build utils" ON)
 OPTION(BUILD_SHARED_LIBS 	"Set to OFF to build static libraries" ON)
 OPTION(BUILD_RESEARCH_UTILS	"Set to OFF to not build utils" OFF)
+OPTION(MARKERMAPPER_DEVINSTALL	"Set to OFF to not build utils" ON)
 
 # ----------------------------------------------------------------------------
 #   Find Dependencies
 # ----------------------------------------------------------------------------
 find_package(OpenCV REQUIRED)
 find_package(aruco REQUIRED)
-SET(REQUIRED_LIBRARIES ${REQUIRED_LIBRARIES} ${OpenCV_LIBS} ${aruco_LIBS} )
+
+include_directories(3rdparty/eigen3)
+#include_directories(3rdparty/aruco)
+#SET(EXTRALIBNAME ${PROJECT_NAME}_)
+#ADD_SUBDIRECTORY(3rdparty/aruco/aruco)
+
+SET(REQUIRED_LIBRARIES ${REQUIRED_LIBRARIES} ${OpenCV_LIBS}  ${EXTRALIBNAME}aruco )
 INCLUDE_DIRECTORIES(${aruco_DIR})
 IF(NOT USE_OWN_EIGEN3)
     find_package( Eigen3 REQUIRED )
@@ -86,9 +93,7 @@ ADD_CUSTOM_TARGET(uninstall "${CMAKE_COMMAND}" -P "${CMAKE_CURRENT_BINARY_DIR}/c
 # ----------------------------------------------------------------------------
 
 CONFIGURE_FILE("${PROJECT_SOURCE_DIR}/config.cmake.in" "${PROJECT_BINARY_DIR}/${PROJECT_NAME}Config.cmake")
-INSTALL(FILES "${PROJECT_BINARY_DIR}/${PROJECT_NAME}Config.cmake" DESTINATION lib/cmake/ )
-
-
+INSTALL(FILES "${PROJECT_BINARY_DIR}/${PROJECT_NAME}Config.cmake" DESTINATION share/${PROJECT_NAME} )
 
 
 # ----------------------------------------------------------------------------
@@ -248,6 +253,7 @@ ENDIF()
 # DIRS
 #------------------------------------------------
 ADD_SUBDIRECTORY(src)
+
 IF (BUILD_UTILS)
   ADD_SUBDIRECTORY(utils)
 ENDIF()

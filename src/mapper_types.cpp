@@ -106,7 +106,7 @@ void MarkerInfo::fromStream(std::istream &str){
     str.read((char*)&id,sizeof(int));
     str.read((char*)&markerSize,sizeof(float));
 }
-void MarkerSet::saveToFile(std::string fp)throw (std::exception){
+void MarkerSet::saveToFile(std::string fp){
 
     std::ofstream file(fp,std::ios::binary);
     if (!file) throw std::runtime_error("Could not open file for writing:"+fp);
@@ -114,7 +114,7 @@ void MarkerSet::saveToFile(std::string fp)throw (std::exception){
 
 }
 
-void MarkerSet::readFromFile(std::string fp)throw (std::exception){
+void MarkerSet::readFromFile(std::string fp){
     std::ifstream file(fp,std::ios::binary);
     if (!file) throw std::runtime_error("Could not open file for reading:"+fp);
     readFromStream(file);
@@ -122,14 +122,14 @@ void MarkerSet::readFromFile(std::string fp)throw (std::exception){
 }
 
 
-void MarkerSet::saveToStream(std::ostream &str)throw (std::exception){
+void MarkerSet::saveToStream(std::ostream &str){
     uint64_t sig=222237123;
     str.write((char*)&sig,sizeof(sig));
     IoHelper::toStream__(*this,str);
 
 }
 
-void MarkerSet::readFromStream(std::istream & str)throw (std::exception)
+void MarkerSet::readFromStream(std::istream & str)
 {
     uint64_t sig=0;
     str.read((char*)&sig,sizeof(sig));
@@ -137,5 +137,35 @@ void MarkerSet::readFromStream(std::istream & str)throw (std::exception)
     IoHelper::fromStream__<MarkerSet,uint32_t,MarkerInfo>(*this,str);
 
 }
+void  FrameSet::saveToFile(std::string fp){
+    std::ofstream file(fp,std::ios::binary);
+    if (!file) throw std::runtime_error("Could not open file for writing:"+fp);
+
+    uint32_t s=size();
+    file.write((char*)&s,sizeof(s));
+    for(const auto &e:*this){
+        file.write((char*)&e.first,sizeof(e.first));
+        e.second.toStream(file);
+    }
+}
+
+void FrameSet::readFromFile(std::string fp){
+    std::ifstream file(fp,std::ios::binary);
+    if (!file) throw std::runtime_error("Could not open file for reading:"+fp);
+
+    clear();
+    uint32_t s;
+    file.read((char*)&s,sizeof(s));
+    for(uint32_t i=0;i<s;i++ ){
+        uint32_t first;
+        FrameInfo second;
+
+        file.read((char*)&first,sizeof(first));
+        second.fromStream(file);
+
+        insert({first,second});
+    }
+}
+
 
 }

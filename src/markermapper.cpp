@@ -359,7 +359,7 @@ std::shared_ptr<MarkerMapper>  MarkerMapper::readFromFile ( std::string fname ) 
 }
 
 
- void MarkerMapper::saveToPcd(string fpath,bool addViewLocations)throw(std::exception) {
+ void MarkerMapper::saveToPcd(string fpath,bool addViewLocations) {
      if (addViewLocations)
          savePCDFile(fpath,_markerSet,_frameSet,_originMarkerId);
      else
@@ -390,7 +390,7 @@ std::shared_ptr<MarkerMapper>  MarkerMapper::readFromFile ( std::string fname ) 
 
 
  }
- void MarkerMapper::saveFrameSetPosesToFile(string filepath )throw(std::exception){
+ void MarkerMapper::saveFrameSetPosesToFile(string filepath ){
      std::ofstream file(filepath);
      float qx,qy,qz,qw,tx,ty,tz;
      for(auto frame:_frameSet){
@@ -428,7 +428,7 @@ std::shared_ptr<MarkerMapper>  MarkerMapper::readFromFile ( std::string fname ) 
 
 
  //Returns the mapper with the name indicated
-std::shared_ptr< MarkerMapper> MarkerMapper::create(string name )throw (std::exception){
+std::shared_ptr< MarkerMapper> MarkerMapper::create(string name ){
 
 if(name.empty()) name="global_graph";
 if (name=="global_graph") return std::make_shared<GlobalGraphMarkerMapper>();/*

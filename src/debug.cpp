@@ -44,13 +44,13 @@ void Debug::clearStringDebugInfo(){
 
 }
 void PreprocessedVideo::process(const cv::Mat &image, uint32_t frame_idx){
-     _mdetector.detect ( image,detected_markers );
+     detected_markers=_mdetector.detect ( image );
     if (detected_markers.size()<2)return;
     _frameSet.insert(std::make_pair(frame_idx,FrameInfo(frame_idx,detected_markers)));
 
 }
 
-void PreprocessedVideo::saveToFile(std::string path)throw(std::exception){
+void PreprocessedVideo::saveToFile(std::string path){
 ofstream file(path);
 if (!file) throw std::runtime_error("Could not open file:"+path);
 uint32_t sig=1871;
@@ -64,7 +64,7 @@ IoHelper::toStream__(_frameSet,file);
 
 }
 
-void PreprocessedVideo::readFromFile(std::string path)throw(std::exception){
+void PreprocessedVideo::readFromFile(std::string path){
 
 
     ifstream file(path);

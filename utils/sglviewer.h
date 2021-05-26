@@ -443,15 +443,15 @@ private:
 void OpenCvMapperViewer::printHelp(){
 
     //print help commands
-         cv::putText(_imshow, "'MOUSE[+SHIFT|CTRL]' change view", cvPoint(30,40), cv::FONT_HERSHEY_COMPLEX_SMALL, 0.5, cvScalar(200,200,250), 1, CV_AA);
-         cv::putText(_imshow, "'n' show/hide marker numbers", cvPoint(30,60), cv::FONT_HERSHEY_COMPLEX_SMALL, 0.5, cvScalar(200,200,250), 1, CV_AA);
-         cv::putText(_imshow, "'ESC' Exit", cvPoint(50,60), cv::FONT_HERSHEY_COMPLEX_SMALL, 0.5, cvScalar(200,200,250), 1, CV_AA);
+         cv::putText(_imshow, "'MOUSE[+SHIFT|CTRL]' change view", cv::Point(30,40), cv::FONT_HERSHEY_COMPLEX_SMALL, 0.5, cv::Scalar(200,200,250), 1);
+         cv::putText(_imshow, "'n' show/hide marker numbers", cv::Point(30,60), cv::FONT_HERSHEY_COMPLEX_SMALL, 0.5, cv::Scalar(200,200,250), 1);
+         cv::putText(_imshow, "'ESC' Exit", cv::Point(50,60), cv::FONT_HERSHEY_COMPLEX_SMALL, 0.5, cv::Scalar(200,200,250), 1);
 }
 
 
 
 void OpenCvMapperViewer::updateImage(  ) {
-    mapdrawer.draw(_imshow,showNumbers,cv::Mat::eye(4,4,CV_32F));
+    mapdrawer.draw(_imshow,showNumbers );
     printHelp();
 }
 

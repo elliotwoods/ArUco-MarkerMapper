@@ -15,12 +15,12 @@ cv::Mat solvePnP(const std::vector<cv::Point3f> &p3d,const std::vector<cv::Point
 std::vector<cv::Point3f> getMarkerPoints(float size,cv::Mat RT=cv::Mat());
 std::vector<cv::Point3f> getMarkerPoints( const MarkerInfo &m);
 double cameraMarkerDotProduct(cv::Mat c2m);
-std::map<uint32_t,double> getAvrgMarkerRepjError(const MarkerSet & ms, const std::map<uint32_t, FrameInfo> &fs, const aruco::CameraParameters &_cam_params);
+std::map<uint32_t,double> getAvrgMarkerRepjError(const MarkerSet & ms, const FrameSet &fs, const aruco::CameraParameters &_cam_params);
 
-MARKERMAPPER_API void savePCDFile(std::string fpath, const MarkerSet &ms, int origin=-1)throw(std::exception) ;
-MARKERMAPPER_API void savePCDFile(std::string fpath, const MarkerSet &ms, const FrameSet &fset, int origin=-1, bool writeFrameIds=false, cv::Scalar marker_color=cv::Scalar(255,0,0), cv::Scalar frame_color=cv::Scalar(0,255,0))throw(std::exception) ;
+MARKERMAPPER_API void savePCDFile(std::string fpath, const MarkerSet &ms, int origin=-1) ;
+MARKERMAPPER_API void savePCDFile(std::string fpath, const MarkerSet &ms, const FrameSet &fset, int origin=-1, bool writeFrameIds=false, cv::Scalar marker_color=cv::Scalar(255,0,0), cv::Scalar frame_color=cv::Scalar(0,255,0)) ;
 
-MARKERMAPPER_API void savePCDFile(std::string fpath,const MarkerSet &ms, const std::vector<cv::Mat >  &vector_rt_c2g,int org_id =-1)throw(std::exception) ;
+MARKERMAPPER_API void savePCDFile(std::string fpath,const MarkerSet &ms, const std::vector<cv::Mat >  &vector_rt_c2g,int org_id =-1) ;
 
 void savePCDFile(const char *filename,  const std::vector<cv::Point3f> &points,
                  const  cv::Scalar color ) ;

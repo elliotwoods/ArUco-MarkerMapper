@@ -20,25 +20,26 @@ SET (optimizers_src optimizers/ippe.cpp     optimizers/fullsceneoptimizer.cpp )
 SET(hdrs ${hdrs} ${optimizers_hdr} ${mappers_hdr} ${utils_hdr})
 SET(srcs ${srcs} ${optimizers_src} ${mappers_src} ${utils_src})
 
-ADD_LIBRARY(marker_mapper ${srcs} ${hdrs})
+SET(LIBNAME ${EXTRALIBNAME}marker_mapper)
+ADD_LIBRARY(${LIBNAME} ${srcs} ${hdrs})
 
 IF(NOT COMPILE_IN_ANDROID)
-SET_TARGET_PROPERTIES(marker_mapper PROPERTIES 				# create *nix style library versions + symbolic links
+SET_TARGET_PROPERTIES(${LIBNAME} PROPERTIES 				# create *nix style library versions + symbolic links
         DEFINE_SYMBOL MARKERMAPPER_DSO_EXPORTS
 	VERSION ${PROJECT_VERSION}
 	SOVERSION ${PROJECT_SOVERSION}
 	CLEAN_DIRECT_OUTPUT 1 					# allow creating static and shared libs without conflicts
-	OUTPUT_NAME "marker_mapper${PROJECT_DLLVERSION}" 	# avoid conflicts between library and binary target names
+        OUTPUT_NAME "${LIBNAME}${PROJECT_DLLVERSION}" 	# avoid conflicts between library and binary target names
 )
 
-TARGET_LINK_LIBRARIES(marker_mapper ${REQUIRED_LIBRARIES} )
+TARGET_LINK_LIBRARIES(${LIBNAME} ${EXTRALIBNAME}aruco ${OpenCV_LIBS})
 
-INSTALL(TARGETS marker_mapper
+INSTALL(TARGETS ${LIBNAME}
 	RUNTIME DESTINATION bin COMPONENT main			# Install the dll file in bin directory
 	LIBRARY DESTINATION lib PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE COMPONENT main
         ARCHIVE DESTINATION lib COMPONENT main)			# Install the dll.a file in lib directory
 
-
+IF(MARKERMAPPER_DEVINSTALL)
 
 INSTALL(FILES ${hdrs_base}
         DESTINATION include/marker_mapper
@@ -50,6 +51,7 @@ INSTALL(FILES ${utils_hdr}
 INSTALL(FILES ${optimizers_hdr}
         DESTINATION include/marker_mapper/optimizers
         COMPONENT main)
+    ENDIF()
 ELSE()
     MESSAGE(STATUS  "MARKERMAPPER COMPILATION")
     target_link_libraries( # Specifies the target library.

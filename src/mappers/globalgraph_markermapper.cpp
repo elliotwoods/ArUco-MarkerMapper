@@ -72,6 +72,7 @@ bool GlobalGraphMarkerMapper::process (const arucoMarkerSet &in_detected_markers
                     float minDot=std::numeric_limits<float>::max();
                     for(auto p:poses) minDot=std::min(float(minDot),fabs(pose.r_dot(kdtree.s3s[p.first])));
                     if(minDot<max_angular_dot_value) add2kdtree=true;//add if above a threshold
+
                 }
             }
             if(add2kdtree ){//add point to its kdtree
@@ -85,6 +86,9 @@ bool GlobalGraphMarkerMapper::process (const arucoMarkerSet &in_detected_markers
     if (addFrame)    {
         markermapper_debug_msg("Adding frame "<<_frameCounter,5);
         _frameSet[_frameCounter]=FrameInfo(_frameCounter,detected_markers);;
+        for(auto d:detected_markers)
+            markermapper_debug_msg("    marker "<<d.id,5);
+
         return true;
     }
     else {
@@ -190,8 +194,8 @@ void GlobalGraphMarkerMapper::optimize_impl (   ) {
 
     params.fixedMarkers={uint32_t(_originMarkerId)};
     params.max_iters=100;
-    params.min_error=0.05;
-    params.min_step_error=0.005;
+    params.min_error=0.5;
+    params.min_step_error=0.05;
     params.verbose=true;
     params.fix_camera_params=!_optimizeCameraIntrinsics;
 
@@ -540,7 +544,7 @@ void GlobalGraphMarkerMapper::map_fromStream(std::map<uint32_t,uint32_t> &t,istr
     }
 }
 
-void GlobalGraphMarkerMapper::debug_save(string fp,StgMatrix<se3> &poseGraph, graph::Graph<int> &cost_graph,std::map<uint32_t,uint32_t>   &markers_id_pos,std::map<uint32_t,uint32_t>   &markers_pos_id)throw (std::exception){
+void GlobalGraphMarkerMapper::debug_save(string fp,StgMatrix<se3> &poseGraph, graph::Graph<int> &cost_graph,std::map<uint32_t,uint32_t>   &markers_id_pos,std::map<uint32_t,uint32_t>   &markers_pos_id){
 
     ofstream file(fp);
     if(!file)throw std::runtime_error("Could not open file") ;
@@ -551,7 +555,7 @@ void GlobalGraphMarkerMapper::debug_save(string fp,StgMatrix<se3> &poseGraph, gr
 
 }
 
-bool GlobalGraphMarkerMapper::debug_read(string fp,StgMatrix<se3> &poseGraph, graph::Graph<int> &cost_graph,std::map<uint32_t,uint32_t>   &markers_id_pos,std::map<uint32_t,uint32_t>   &markers_pos_id)throw (std::exception){
+bool GlobalGraphMarkerMapper::debug_read(string fp,StgMatrix<se3> &poseGraph, graph::Graph<int> &cost_graph,std::map<uint32_t,uint32_t>   &markers_id_pos,std::map<uint32_t,uint32_t>   &markers_pos_id){
     ifstream file(fp);
     if (!file)return false;
     poseGraph.fromStream(file);

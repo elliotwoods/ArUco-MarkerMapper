@@ -66,7 +66,7 @@ public:
  *          second parameter : J :  output. Data must be returned in T
  * @return final error
  */
-    T solve(  eVector  &z, F_z_x , F_z_J)throw (std::exception);
+    T solve(  eVector  &z, F_z_x , F_z_J);
 /// Step by step solve mode
 
 
@@ -74,27 +74,27 @@ public:
      * @brief init initializes the search engine
      * @param z
      */
-    void init(eVector  &z, F_z_x )throw (std::exception);
+    void init(eVector  &z, F_z_x );
     /**
      * @brief step gives a step of the search
      * @param f_z_x error evaluation function
      * @param f_z_J Jacobian function
      * @return error of current solution
      */
-    bool step(  F_z_x f_z_x , F_z_J  f_z_J)throw (std::exception);
-    bool step(  F_z_x f_z_x)throw (std::exception);
+    bool step(  F_z_x f_z_x , F_z_J  f_z_J);
+    bool step(  F_z_x f_z_x);
     /**
      * @brief getCurrentSolution returns the current solution
      * @param z output
      * @return error of the solution
      */
-    T getCurrentSolution(eVector  &z)throw (std::exception);
+    T getCurrentSolution(eVector  &z);
     /**
      * @brief getBestSolution sets in z the best solution up to this moment
      * @param z output
      * @return  error of the solution
      */
-    T getBestSolution(eVector  &z)throw (std::exception);
+    T getBestSolution(eVector  &z);
 
   /**  Automatic jacobian estimation
  * @brief solve  non linear minimization problem ||F(z)||, where F(z)=f(z) f(z)^t
@@ -104,7 +104,7 @@ public:
  *          second parameter : x :  output. Data must be returned in T
  * @return final error
  */
-    T solve(  eVector  &z, F_z_x )throw (std::exception);
+    T solve(  eVector  &z, F_z_x );
     //to enable verbose mode
     bool & verbose(){return _verbose;}
 
@@ -126,8 +126,8 @@ private:
     std::function<void(const eVector  &)> _step_callback;
     std::function<bool(const eVector  &)> _stopFunction;
 
-    void  add_missing_diagonal_elements( Eigen::SparseMatrix<T> &M)throw (std::exception);
-    void  get_diagonal_elements_refs_and_add( Eigen::SparseMatrix<T> &M,std::vector<T*> &d_refs,T add_val)throw (std::exception);
+    void  add_missing_diagonal_elements( Eigen::SparseMatrix<T> &M);
+    void  get_diagonal_elements_refs_and_add( Eigen::SparseMatrix<T> &M,std::vector<T*> &d_refs,T add_val);
     void  mult(const Eigen::SparseMatrix<T> &lhs, const Eigen::SparseMatrix<T> &rhs,Eigen::SparseMatrix<T> &res);
 
 };
@@ -206,16 +206,16 @@ sJ.setFromTriplets(sp_tripletsAll.begin(),sp_tripletsAll.end());
 
 
 template<typename T>
-T  SparseLevMarq<T>:: solve(  eVector  &z, F_z_x f_z_x)throw (std::exception){
+T  SparseLevMarq<T>:: solve(  eVector  &z, F_z_x f_z_x){
 return solve(z,f_z_x,std::bind(&SparseLevMarq<T>::calcDerivates,this,std::placeholders::_1,std::placeholders::_2,f_z_x));
 }
 template<typename T>
-bool  SparseLevMarq<T>:: step(  F_z_x f_z_x)throw (std::exception){
+bool  SparseLevMarq<T>:: step(  F_z_x f_z_x){
 return step(f_z_x,std::bind(&SparseLevMarq<T>::calcDerivates,this,std::placeholders::_1,std::placeholders::_2,f_z_x));
 }
 
 template<typename T>
-void SparseLevMarq<T>::init(eVector  &z, F_z_x f_z_x )throw (std::exception){
+void SparseLevMarq<T>::init(eVector  &z, F_z_x f_z_x ){
 curr_z=z;
 I.resize(z.rows(),z.rows());
 I.setIdentity();
@@ -229,7 +229,7 @@ mu=-1;
 }
 
 template<typename T>
-void SparseLevMarq<T>::get_diagonal_elements_refs_and_add( Eigen::SparseMatrix<T> &M,std::vector<T*> &refs,T add_val)throw (std::exception){
+void SparseLevMarq<T>::get_diagonal_elements_refs_and_add( Eigen::SparseMatrix<T> &M,std::vector<T*> &refs,T add_val){
 refs.resize(M.cols());
 //now, get their references and add mu
 for (int k=0; k<M.outerSize(); ++k)
@@ -304,7 +304,7 @@ res = resRow;
 }
 
 template<typename T>
-void SparseLevMarq<T>::add_missing_diagonal_elements(Eigen::SparseMatrix<T> &M)throw (std::exception){
+void SparseLevMarq<T>::add_missing_diagonal_elements(Eigen::SparseMatrix<T> &M){
   std::vector<bool> diag(M.rows(),false);
   for (int k=0; k<M.outerSize(); ++k)
      for (  typename Eigen::SparseMatrix<T>::InnerIterator it(M,k); it; ++it)
@@ -315,7 +315,7 @@ void SparseLevMarq<T>::add_missing_diagonal_elements(Eigen::SparseMatrix<T> &M)t
 }
 #define splm_get_time(a,b) std::chrono::duration_cast<std::chrono::duration<T>>(a-b).count()
 template<typename T>
-bool SparseLevMarq<T>::step( F_z_x f_z_x, F_z_J f_J)throw (std::exception){
+bool SparseLevMarq<T>::step( F_z_x f_z_x, F_z_J f_J){
 
 auto t1= std::chrono::high_resolution_clock::now();
 f_J(curr_z,J);
@@ -391,13 +391,13 @@ return isStepAccepted;
 
 
 template<typename T>
-T  SparseLevMarq<T>:: getCurrentSolution(eVector  &z)throw (std::exception){
+T  SparseLevMarq<T>:: getCurrentSolution(eVector  &z){
 
 z=curr_z;
 return currErr;
 }
 template<typename T>
-T  SparseLevMarq<T>::solve( eVector  &z, F_z_x  f_z_x, F_z_J f_J)throw (std::exception){
+T  SparseLevMarq<T>::solve( eVector  &z, F_z_x  f_z_x, F_z_J f_J){
 prevErr=std::numeric_limits<T>::max();
 init(z,f_z_x);
 
