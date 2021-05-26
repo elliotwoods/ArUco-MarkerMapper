@@ -154,8 +154,8 @@
     <ClCompile Include="MapperFromImages.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\build\src\marker_mapper.vcxproj">
-      <Project>{d94e2d26-0eaf-3461-89a8-a5e1272e8a47}</Project>
+    <ProjectReference Include="..\MarkerMapper\MarkerMapper.vcxproj">
+      <Project>{01295438-4803-4daa-80f6-0b642f7f8633}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

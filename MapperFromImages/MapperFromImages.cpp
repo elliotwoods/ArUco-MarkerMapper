@@ -67,6 +67,14 @@ int main(int argc, char** argv) {
         else
             AMM->getMarkerDetector().setDictionary(dict);
         //    AMM->getMarkerDetector().setDetectionMode(aruco::DM_FAST,0.02);
+
+        {
+            auto& detector = AMM->getMarkerDetector();
+            auto parameters = detector.getParameters();
+            parameters.maxThreads = std::thread::hardware_concurrency();
+            detector.setParameters(parameters);
+        }
+
         char key = 0;
         cv::Mat image, image2;
         vector<string> files = readDir(argv[1]);
@@ -103,9 +111,6 @@ int main(int argc, char** argv) {
                 , Camera.CameraMatrix
                 , Camera.Distorsion);
             AMM->drawDetectedMarkers(image, 3);
-            cv::resize(image, image2, cv::Size(1280, 960));
-            cv::imshow("image", image2);
-            key = cv::waitKey(10);
         }
 
         //finish processing

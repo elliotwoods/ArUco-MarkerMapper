@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{dabca8ab-c8e2-466c-a8e6-81d60351b309}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\mappers">
+      <UniqueIdentifier>{a89b465a-820c-45bd-a1d5-6bbc13624ae2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\optimizers">
+      <UniqueIdentifier>{d5862aae-ed8f-46d1-99ea-52dd9ff0f8df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\utils">
+      <UniqueIdentifier>{a05e519c-d6cb-4b07-8596-5937cb40bff6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\markermapper.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\multicropdetect.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\debug.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mapper_types.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\marker_mapper_exports.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mappers\globalgraph_markermapper.h">
+      <Filter>src\mappers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mappers\graph.h">
+      <Filter>src\mappers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mappers\posegraphoptimizer.h">
+      <Filter>src\mappers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mappers\stgmatrix.h">
+      <Filter>src\mappers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\optimizers\fullsceneoptimizer.h">
+      <Filter>src\optimizers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\optimizers\ippe.h">
+      <Filter>src\optimizers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\optimizers\sparselevmarq.h">
+      <Filter>src\optimizers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\utils\kdtree.h">
+      <Filter>src\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\utils\mm_omp.h">
+      <Filter>src\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\utils\nanoflann.h">
+      <Filter>src\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\utils\se3.h">
+      <Filter>src\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\utils\utils3d.h">
+      <Filter>src\utils</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\debug.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\mapper_types.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\markermapper.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\multicropdetect.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\mappers\posegraphoptimizer.cpp">
+      <Filter>src\mappers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\mappers\globalgraph_markermapper.cpp">
+      <Filter>src\mappers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\optimizers\ippe.cpp">
+      <Filter>src\optimizers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\optimizers\fullsceneoptimizer.cpp">
+      <Filter>src\optimizers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\utils\utils3d.cpp">
+      <Filter>src\utils</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

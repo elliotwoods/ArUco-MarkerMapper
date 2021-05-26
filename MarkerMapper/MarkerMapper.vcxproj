@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\debug.h" />
+    <ClInclude Include="..\src\mappers\globalgraph_markermapper.h" />
+    <ClInclude Include="..\src\mappers\graph.h" />
+    <ClInclude Include="..\src\mappers\posegraphoptimizer.h" />
+    <ClInclude Include="..\src\mappers\stgmatrix.h" />
+    <ClInclude Include="..\src\mapper_types.h" />
+    <ClInclude Include="..\src\markermapper.h" />
+    <ClInclude Include="..\src\marker_mapper_exports.h" />
+    <ClInclude Include="..\src\multicropdetect.h" />
+    <ClInclude Include="..\src\optimizers\fullsceneoptimizer.h" />
+    <ClInclude Include="..\src\optimizers\ippe.h" />
+    <ClInclude Include="..\src\optimizers\sparselevmarq.h" />
+    <ClInclude Include="..\src\utils\kdtree.h" />
+    <ClInclude Include="..\src\utils\mm_omp.h" />
+    <ClInclude Include="..\src\utils\nanoflann.h" />
+    <ClInclude Include="..\src\utils\se3.h" />
+    <ClInclude Include="..\src\utils\utils3d.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\debug.cpp" />
+    <ClCompile Include="..\src\mappers\globalgraph_markermapper.cpp" />
+    <ClCompile Include="..\src\mappers\posegraphoptimizer.cpp" />
+    <ClCompile Include="..\src\mapper_types.cpp" />
+    <ClCompile Include="..\src\markermapper.cpp" />
+    <ClCompile Include="..\src\multicropdetect.cpp" />
+    <ClCompile Include="..\src\optimizers\fullsceneoptimizer.cpp" />
+    <ClCompile Include="..\src\optimizers\ippe.cpp" />
+    <ClCompile Include="..\src\utils\utils3d.cpp" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{01295438-4803-4daa-80f6-0b642f7f8633}</ProjectGuid>
+    <RootNamespace>MarkerMapper</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>C:\dev\ArUco-MarkerMapper\build\src;C:\dev\ArUco-MarkerMapper\src;C:\Program Files (x86)\aruco\include;C:\Program Files (x86)\aruco\include\aruco;C:\dev\ArUco-MarkerMapper\3rdparty\eigen3;C:\dev\aruco\aruco-3.1.12\src;C:\dev\aruco\aruco-3.1.12\build;C:\dev\ArUco-MarkerMapper\src\.;C:\dev\opencv\opencv\build;C:\dev\opencv\opencv\include;C:\dev\opencv\opencv\modules\core\include;C:\dev\opencv\opencv\modules\flann\include;C:\dev\opencv\opencv\modules\imgproc\include;C:\dev\opencv\opencv_contrib\modules\intensity_transform\include;C:\dev\opencv\opencv\modules\ml\include;C:\dev\opencv\opencv_contrib\modules\phase_unwrapping\include;C:\dev\opencv\opencv\modules\photo\include;C:\dev\opencv\opencv_contrib\modules\plot\include;C:\dev\opencv\opencv_contrib\modules\quality\include;C:\dev\opencv\opencv_contrib\modules\reg\include;C:\dev\opencv\opencv_contrib\modules\surface_matching\include;C:\dev\opencv\opencv_contrib\modules\xphoto\include;C:\dev\opencv\opencv\modules\dnn\include;C:\dev\opencv\opencv_contrib\modules\dnn_superres\include;C:\dev\opencv\opencv\modules\features2d\include;C:\dev\opencv\opencv_contrib\modules\fuzzy\include;C:\dev\opencv\opencv_contrib\modules\hfs\include;C:\dev\opencv\opencv\modules\imgcodecs\include;C:\dev\opencv\opencv_contrib\modules\line_descriptor\include;C:\dev\opencv\opencv_contrib\modules\saliency\include;C:\dev\opencv\opencv_contrib\modules\text\include;C:\dev\opencv\opencv\modules\videoio\include;C:\dev\opencv\opencv_contrib\modules\wechat_qrcode\include;C:\dev\opencv\opencv_contrib\modules\barcode\include;C:\dev\opencv\opencv\modules\calib3d\include;C:\dev\opencv\opencv_contrib\modules\datasets\include;C:\dev\opencv\opencv\modules\highgui\include;C:\dev\opencv\opencv_contrib\modules\mcc\include;C:\dev\opencv\opencv\modules\objdetect\include;C:\dev\opencv\opencv_contrib\modules\rapid\include;C:\dev\opencv\opencv_contrib\modules\rgbd\include;C:\dev\opencv\opencv_contrib\modules\shape\include;C:\dev\opencv\opencv_contrib\modules\structured_light\include;C:\dev\opencv\opencv\modules\video\include;C:\dev\opencv\opencv_contrib\modules\videostab\include;C:\dev\opencv\opencv_contrib\modules\xfeatures2d\include;C:\dev\opencv\opencv_contrib\modules\ximgproc\include;C:\dev\opencv\opencv_contrib\modules\xobjdetect\include;C:\dev\opencv\opencv_contrib\modules\aruco\include;C:\dev\opencv\opencv_contrib\modules\bgsegm\include;C:\dev\opencv\opencv_contrib\modules\bioinspired\include;C:\dev\opencv\opencv_contrib\modules\ccalib\include;C:\dev\opencv\opencv_contrib\modules\dnn_objdetect\include;C:\dev\opencv\opencv_contrib\modules\dpm\include;C:\dev\opencv\opencv_contrib\modules\face\include;C:\dev\opencv\opencv\modules\gapi\include;C:\dev\opencv\opencv_contrib\modules\optflow\include;C:\dev\opencv\opencv\modules\stitching\include;C:\dev\opencv\opencv_contrib\modules\superres\include;C:\dev\opencv\opencv_contrib\modules\tracking\include;C:\dev\opencv\opencv_contrib\modules\stereo\include;C:\dev\opencv\opencv\modules\world\include;C:\dev\opencv\opencv_contrib\modules\img_hash\include;C:\dev\opencv\opencv\modules\ts\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>C:\dev\ArUco-MarkerMapper\build\src;C:\dev\ArUco-MarkerMapper\src;C:\Program Files (x86)\aruco\include;C:\Program Files (x86)\aruco\include\aruco;C:\dev\ArUco-MarkerMapper\3rdparty\eigen3;C:\dev\aruco\aruco-3.1.12\src;C:\dev\aruco\aruco-3.1.12\build;C:\dev\ArUco-MarkerMapper\src\.;C:\dev\opencv\opencv\build;C:\dev\opencv\opencv\include;C:\dev\opencv\opencv\modules\core\include;C:\dev\opencv\opencv\modules\flann\include;C:\dev\opencv\opencv\modules\imgproc\include;C:\dev\opencv\opencv_contrib\modules\intensity_transform\include;C:\dev\opencv\opencv\modules\ml\include;C:\dev\opencv\opencv_contrib\modules\phase_unwrapping\include;C:\dev\opencv\opencv\modules\photo\include;C:\dev\opencv\opencv_contrib\modules\plot\include;C:\dev\opencv\opencv_contrib\modules\quality\include;C:\dev\opencv\opencv_contrib\modules\reg\include;C:\dev\opencv\opencv_contrib\modules\surface_matching\include;C:\dev\opencv\opencv_contrib\modules\xphoto\include;C:\dev\opencv\opencv\modules\dnn\include;C:\dev\opencv\opencv_contrib\modules\dnn_superres\include;C:\dev\opencv\opencv\modules\features2d\include;C:\dev\opencv\opencv_contrib\modules\fuzzy\include;C:\dev\opencv\opencv_contrib\modules\hfs\include;C:\dev\opencv\opencv\modules\imgcodecs\include;C:\dev\opencv\opencv_contrib\modules\line_descriptor\include;C:\dev\opencv\opencv_contrib\modules\saliency\include;C:\dev\opencv\opencv_contrib\modules\text\include;C:\dev\opencv\opencv\modules\videoio\include;C:\dev\opencv\opencv_contrib\modules\wechat_qrcode\include;C:\dev\opencv\opencv_contrib\modules\barcode\include;C:\dev\opencv\opencv\modules\calib3d\include;C:\dev\opencv\opencv_contrib\modules\datasets\include;C:\dev\opencv\opencv\modules\highgui\include;C:\dev\opencv\opencv_contrib\modules\mcc\include;C:\dev\opencv\opencv\modules\objdetect\include;C:\dev\opencv\opencv_contrib\modules\rapid\include;C:\dev\opencv\opencv_contrib\modules\rgbd\include;C:\dev\opencv\opencv_contrib\modules\shape\include;C:\dev\opencv\opencv_contrib\modules\structured_light\include;C:\dev\opencv\opencv\modules\video\include;C:\dev\opencv\opencv_contrib\modules\videostab\include;C:\dev\opencv\opencv_contrib\modules\xfeatures2d\include;C:\dev\opencv\opencv_contrib\modules\ximgproc\include;C:\dev\opencv\opencv_contrib\modules\xobjdetect\include;C:\dev\opencv\opencv_contrib\modules\aruco\include;C:\dev\opencv\opencv_contrib\modules\bgsegm\include;C:\dev\opencv\opencv_contrib\modules\bioinspired\include;C:\dev\opencv\opencv_contrib\modules\ccalib\include;C:\dev\opencv\opencv_contrib\modules\dnn_objdetect\include;C:\dev\opencv\opencv_contrib\modules\dpm\include;C:\dev\opencv\opencv_contrib\modules\face\include;C:\dev\opencv\opencv\modules\gapi\include;C:\dev\opencv\opencv_contrib\modules\optflow\include;C:\dev\opencv\opencv\modules\stitching\include;C:\dev\opencv\opencv_contrib\modules\superres\include;C:\dev\opencv\opencv_contrib\modules\tracking\include;C:\dev\opencv\opencv_contrib\modules\stereo\include;C:\dev\opencv\opencv\modules\world\include;C:\dev\opencv\opencv_contrib\modules\img_hash\include;C:\dev\opencv\opencv\modules\ts\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -68,17 +68,16 @@ bool MarkerMapper::process(const cv::Mat &image
 	}
 	catch (...) {
 		markers = findMarkersMultiCrop(_mdetector, image, 4, 0.5f);
-
-		auto preview = drawMarkers(image, markers, cacheFilename + ".yml");
-		cv::resize(preview, preview, cv::Size(1920, 1920 * image.rows / image.cols));
-
-		cv::imshow("preview", preview);
-		cv::waitKey(10);
-		cv::imwrite(cacheFilename + ".png", preview);
-
 		cout << cacheFilename << endl;
 		markers.save(cacheFilename + ".yml");
 	}
+
+    auto preview = drawMarkers(image, markers, cacheFilename + ".yml");
+    cv::resize(preview, preview, cv::Size(1920, 1920 * image.rows / image.cols));
+
+    cv::imshow("preview", preview);
+    cv::waitKey(10);
+    cv::imwrite(cacheFilename + ".bmp", preview);
 
 	//trim the markers
 	{

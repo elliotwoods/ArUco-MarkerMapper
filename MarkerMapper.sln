@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31112.23
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MapperFromImages", "MapperFromImages\MapperFromImages.vcxproj", "{7064B0D1-CF17-4AC6-BF17-DD532EF6EBFE}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MarkerMapper", "MarkerMapper\MarkerMapper.vcxproj", "{01295438-4803-4DAA-80F6-0B642F7F8633}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7064B0D1-CF17-4AC6-BF17-DD532EF6EBFE}.Debug|x64.ActiveCfg = Debug|x64
+		{7064B0D1-CF17-4AC6-BF17-DD532EF6EBFE}.Debug|x64.Build.0 = Debug|x64
+		{7064B0D1-CF17-4AC6-BF17-DD532EF6EBFE}.Release|x64.ActiveCfg = Release|x64
+		{7064B0D1-CF17-4AC6-BF17-DD532EF6EBFE}.Release|x64.Build.0 = Release|x64
+		{01295438-4803-4DAA-80F6-0B642F7F8633}.Debug|x64.ActiveCfg = Debug|x64
+		{01295438-4803-4DAA-80F6-0B642F7F8633}.Debug|x64.Build.0 = Debug|x64
+		{01295438-4803-4DAA-80F6-0B642F7F8633}.Release|x64.ActiveCfg = Release|x64
+		{01295438-4803-4DAA-80F6-0B642F7F8633}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8BFB6BFC-55CF-36A4-A9F3-10C13597134E}
+	EndGlobalSection
+EndGlobal
