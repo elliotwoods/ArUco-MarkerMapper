@@ -40,7 +40,13 @@ public:
      */
     void setParams (const aruco::CameraParameters & cam_p, float defaultMarkerSize, int originMarkerId=-1,bool optimizeCameraIntrinsics=true) ;
     //process next frame
-    bool process (const cv::Mat &image,int frame_idx ,const std::string & cacheFilename, bool forceConnectedComponent=false ) ;
+    bool process (const cv::Mat &image
+		, int frame_idx
+		, const std::string & cacheFilename
+		, cv::Mat cameraMatrix
+		, cv::Mat distortionCoefficients
+		, float maxErrorPerMarker = 0.5f
+		, bool forceConnectedComponent = false ) ;
     //draws detected markers in last call to process
     virtual void drawDetectedMarkers (cv::Mat &imshow , int border_width=1)=0;
     //finalizes the process.

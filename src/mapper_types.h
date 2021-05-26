@@ -24,16 +24,46 @@ struct MARKERMAPPER_API arucoMarkerSet: public std::vector<aruco::Marker>{
     arucoMarkerSet(const std::vector<aruco::Marker> &ms):std::vector<aruco::Marker>(ms){}
 
 	void load(const string & filename) {
-		throw("");
+		cv::FileStorage file;
+		if (!file.open(filename, cv::FileStorage::READ)) {
+			throw(cv::Exception());
+		}
+
+		if (!file.isOpened()) {
+			throw(cv::Exception());
+		}
+
+		this->clear();
+
+		cv::FileNode markers = file["markers"];
+		if (markers.empty()) {
+			throw(cv::Exception());
+		}
+
+		for (auto it : markers) {
+			aruco::Marker marker;
+			it["id"] >> marker.id;
+			it["corners"] >> (vector<cv::Point2f> &) marker;
+
+			this->push_back(marker);
+		}
 	}
 
 	void save(const string & filename) const {
+		cv::FileStorage file(filename, cv::FileStorage::WRITE);
+		file << "markers" << "[";
+
 		for (int i = 0; i < this->size(); i++) {
-			auto fileOut = ofstream(filename + "-" + to_string(i) + ".bin", ofstream::binary);
 			const auto & marker = this->at(i);
-			marker.toStream(fileOut);
-			fileOut.close();
+
+			file << "{:";
+			file << "id" << marker.id;
+			file << "corners" << (const vector<cv::Point2f> &) marker;
+			file << "}";
 		}
+
+		file << "]";
+		file.release();
 	}
 
     bool is(uint32_t id){

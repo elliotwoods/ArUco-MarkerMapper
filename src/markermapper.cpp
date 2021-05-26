@@ -17,32 +17,101 @@
 #include "aruco/markerlabeler.h"
 #include "multicropdetect.h"
 
+float getReprojectionError(vector<cv::Point3f> objectPoints, vector<cv::Point2f> imagePoints, cv::Mat cameraMatrix, cv::Mat distortionCoefficients) {
+	cv::Mat translation, rotationVector;
+
+	cv::solvePnP(objectPoints
+		, imagePoints
+		, cameraMatrix
+		, distortionCoefficients
+		, rotationVector
+		, translation);
+
+	vector<cv::Point2f> reprojectedPoints;
+	cv::projectPoints(objectPoints
+		, rotationVector
+		, translation
+		, cameraMatrix
+		, distortionCoefficients
+		, reprojectedPoints);
+
+	//get RMS
+	float accumulate = 0.0f;
+	for (int i = 0; i < objectPoints.size(); i++) {
+		auto delta = reprojectedPoints[i] - imagePoints[i];
+		accumulate += delta.dot(delta);
+	}
+	auto MS = accumulate / objectPoints.size();
+	return sqrt(MS);
+}
+
+
 namespace aruco_mm{
 using namespace std;
 
-bool MarkerMapper::process(const cv::Mat &image, int frame_idx, const string & cacheFilename, bool forceConnectedComponent) {
+bool MarkerMapper::process(const cv::Mat &image
+	, int frame_idx
+	, const std::string & cacheFilename
+	, cv::Mat cameraMatrix
+	, cv::Mat distortionCoefficients
+	, float maxErrorPerMarker
+	, bool forceConnectedComponent) {
+
     markermapper_debug_msg ( "####start "<<frame_idx,5 );
     arucoMarkerSet markers;
 
 	//try to load the markers
 	try {
-		markers.load(cacheFilename);
+		markers.load(cacheFilename + ".yml");
+		cout << "Using cache file" << endl;
 	}
 	catch (...) {
 		markers = findMarkersMultiCrop(_mdetector, image, 4, 0.5f);
 
-		auto preview = drawMarkers(image, markers);
+		auto preview = drawMarkers(image, markers, cacheFilename + ".yml");
 		cv::resize(preview, preview, cv::Size(1920, 1920 * image.rows / image.cols));
 
 		cv::imshow("preview", preview);
 		cv::waitKey(10);
+		cv::imwrite(cacheFilename + ".png", preview);
 
-		cout << endl;
-		//markers.save(cacheFilename);
+		cout << cacheFilename << endl;
+		markers.save(cacheFilename + ".yml");
 	}
 
+	//trim the markers
+	{
+		vector<cv::Point3f> dummyObjectPoints;
+		{
+			dummyObjectPoints.emplace_back(0, 0, 0);
+			dummyObjectPoints.emplace_back(1, 0, 0);
+			dummyObjectPoints.emplace_back(1, 1, 0);
+			dummyObjectPoints.emplace_back(0, 1, 0);
+		}
 
-   // if (markers.size()<2)return;
+		arucoMarkerSet trimmedMarkers;
+		for (const auto & marker : markers) {
+			auto error = getReprojectionError(dummyObjectPoints
+				, (vector<cv::Point2f> &) marker
+				, cameraMatrix
+				, distortionCoefficients);
+
+			cout << "RMS error = " << error;
+
+			if (error < maxErrorPerMarker) {
+				trimmedMarkers.push_back(marker);
+				cout << " o";
+			}
+			cout << endl;
+		}
+
+		markers = trimmedMarkers;
+	}
+
+	if (markers.size() < 2) {
+		//ignore this image
+		return false;
+	}
 
     return process(markers,frame_idx,forceConnectedComponent);
 }

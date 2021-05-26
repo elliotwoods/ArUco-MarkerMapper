@@ -27,7 +27,7 @@ vector<string> readDir(string path) {
 	if ((dir = opendir(path.c_str())) != NULL) {
 		/* print all the files and directories within directory */
 		while ((ent = readdir(dir)) != NULL)
-			res.push_back(path + string("/") + string(ent->d_name));
+			res.push_back(string(ent->d_name));
 		closedir(dir);
 	}
 	//check
@@ -57,7 +57,7 @@ int main(int argc, char **argv) {
 		string dict = argv[4];
 		string outBaseName = argv[5];
 
-		int ref_Marker_Id = -1;
+		int ref_Marker_Id = 1;
 		if (argc >= 7)
 		{
 			if (string(argv[6]) == "-ref") {
@@ -69,7 +69,8 @@ int main(int argc, char **argv) {
 		auto AMM = aruco_mm::MarkerMapper::create();
 		AMM->setParams(Camera
 			, markerSize
-			, ref_Marker_Id);
+			, -1
+			, false);
 
 		//set detector parameters
 		if (cml["-c"]) {
@@ -91,6 +92,8 @@ int main(int argc, char **argv) {
 
 		char key = 0;
 		cv::Mat image, image2;
+
+		auto path = argv[1];
 		vector<string> files = readDir(argv[1]);
 
 		int frameidx = 0;
@@ -98,15 +101,14 @@ int main(int argc, char **argv) {
 		for (size_t i = 0; i < files.size() && key != 27; i++) {
 			cerr << "Reading..." << files[i] << endl;
 			if (files[i].back() == '.') continue;//skip . and ..
-			image = cv::imread(files[i]);
-			if (image.empty())continue;
 
-			//HACK THIS SEEMS TO DANGEROUS 
-//            if (image.rows==Camera.CamSize.width && image.cols==Camera.CamSize.height ){//auto orient by rotation
-//                cv::Mat aux;
-//                cv::transpose(image,aux);
-//                cv::flip(aux,image,0);
-//            }
+			auto fileName = files[i];
+			auto filePath = path + string("/") + fileName;
+
+			image = cv::imread(filePath);
+			if (image.empty()) {
+				continue;
+			}
 
 			if (image.rows != Camera.CamSize.height || image.cols != Camera.CamSize.width) {
 				cerr << "wont process THIS image because is not of the dimensions of the camera calibration file provided" << endl;
@@ -117,11 +119,22 @@ int main(int argc, char **argv) {
 				cv::cvtColor(image, image, CV_RGB2GRAY);
 			}
 
-			AMM->process(image, frameidx++, files[i]);
+			AMM->process(image
+				, frameidx++
+				, "O:\\Data\\Cache\\" + fileName
+				, Camera.CameraMatrix
+				, Camera.Distorsion
+				, true);
 
 			//optimise on every 4th image
-			if (i % 4 == 3) {
-				AMM->optimize();
+			if (frameidx % 8 == 7) {
+				try {
+					AMM->optimize();
+				}
+				catch (std::exception & e) {
+					cout << "Failed to optimize after frame " << frameidx << " " << files[i] << endl;
+					cout << e.what() << endl;
+				}
 			}
 		}
 
