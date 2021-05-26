@@ -1,13 +1,11 @@
 #include <iostream>
 #include <opencv2/highgui/highgui.hpp>
-#include <aruco/cameraparameters.h>
-#include <aruco/dictionary.h>
+#include <aruco.h>
 #include <memory>
 #include <opencv2/imgproc/imgproc.hpp>
 #include "markermapper.h"
 #include "debug.h"
 #include "sglviewer.h"
-#include "aruco/markerlabeler.h"
 
 using namespace std;
 

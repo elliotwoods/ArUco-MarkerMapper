@@ -1,5 +1,10 @@
 # Elliot's notes
 
+## Building
+
+* Use CMAKE to make their solution
+* Add out MapperFromImages project to the solution and use it as the default exe (a copy of mapper_from_images.cpp is made there)
+
 ## We added
 
 * Multi-crop detection

@@ -6,7 +6,7 @@
 #include "sgl.h"
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
-#include "aruco/markermap.h"
+#include "aruco.h"
 #include <string>
 #include <map>
  //Class using an opencv window to render and manipulate a sgl scene

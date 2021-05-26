@@ -13,9 +13,10 @@
 #include <list>
 #include "optimizers/fullsceneoptimizer.h"
 #include "mappers/globalgraph_markermapper.h"
-#include "aruco/aruco.h"
-#include "aruco/markerlabeler.h"
+#include "aruco.h"
 #include "multicropdetect.h"
+
+using namespace std;
 
 float getReprojectionError(vector<cv::Point3f> objectPoints, vector<cv::Point2f> imagePoints, cv::Mat cameraMatrix, cv::Mat distortionCoefficients) {
 	cv::Mat translation, rotationVector;

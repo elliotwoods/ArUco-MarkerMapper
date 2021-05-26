@@ -4,7 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <opencv2/core/core.hpp>
-#include <aruco/cameraparameters.h>
+#include <aruco.h>
 #include "../mapper_types.h"
 #include <exception>
 namespace aruco_mm {

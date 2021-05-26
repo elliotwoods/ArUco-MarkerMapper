@@ -4,8 +4,7 @@
 #include <fstream>
 #include <ctime>
 #include "mapper_types.h"
-#include <aruco/markerdetector.h>
-#include <aruco/cameraparameters.h>
+#include <aruco.h>
 #include "marker_mapper_exports.h"
 #include <mutex>
 namespace aruco_mm{

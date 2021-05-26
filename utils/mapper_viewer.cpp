@@ -1,4 +1,4 @@
-#include <aruco/markermap.h>
+#include <aruco.h>
 #include "sglviewer.h"
 #include <iostream>
 using namespace std;

@@ -1,7 +1,7 @@
 #ifndef _MarkerMap_H
 #define _MarkerMap_H
 #include <opencv2/core/core.hpp>
-#include <aruco/marker.h>
+#include <aruco.h>
 #include "marker_mapper_exports.h"
 #include <set>
 #include <map>
@@ -17,6 +17,49 @@ struct MARKERMAPPER_API arucoMarkerSet: public std::vector<aruco::Marker>{
 
     arucoMarkerSet(){}
     arucoMarkerSet(const std::vector<aruco::Marker> &ms):std::vector<aruco::Marker>(ms){}
+
+    void load(const std::string& filename) {
+        cv::FileStorage file;
+        if (!file.open(filename, cv::FileStorage::READ)) {
+            throw(cv::Exception());
+        }
+
+        if (!file.isOpened()) {
+            throw(cv::Exception());
+        }
+
+        this->clear();
+
+        cv::FileNode markers = file["markers"];
+        if (markers.empty()) {
+            throw(cv::Exception());
+        }
+
+        for (auto it : markers) {
+            aruco::Marker marker;
+            it["id"] >> marker.id;
+            it["corners"] >> (vector<cv::Point2f> &) marker;
+
+            this->push_back(marker);
+        }
+    }
+
+    void save(const std::string& filename) const {
+        cv::FileStorage file(filename, cv::FileStorage::WRITE);
+        file << "markers" << "[";
+
+        for (int i = 0; i < this->size(); i++) {
+            const auto& marker = this->at(i);
+
+            file << "{:";
+            file << "id" << marker.id;
+            file << "corners" << (const vector<cv::Point2f> &) marker;
+            file << "}";
+        }
+
+        file << "]";
+        file.release();
+    }
 
     bool is(uint32_t id){
         for(auto &m:*this) if (m.id==int(id)) return true;

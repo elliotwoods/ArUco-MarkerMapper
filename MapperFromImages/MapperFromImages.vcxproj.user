@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LocalDebuggerCommandArguments>"C:\Users\kimchips\Dropbox (Kimchi and Chips)\KC64 - MMCA\Site Files\Marker Map\2021-05-26 - Terrace test\Marker Map\PNG 70" "C:\Users\kimchips\Dropbox (Kimchi and Chips)\KC64 - MMCA\Site Files\Marker Map\2021-05-26 - Terrace test\camera_calibration.yml" 0.16 ARUCO_MIP_36h12 Map1_Terrace</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LocalDebuggerCommandArguments>"C:\Users\kimchips\Dropbox (Kimchi and Chips)\KC64 - MMCA\Site Files\Marker Map\2021-05-26 - Terrace test\Marker Map\PNG 70" "C:\Users\kimchips\Dropbox (Kimchi and Chips)\KC64 - MMCA\Site Files\Marker Map\2021-05-26 - Terrace test\camera_calibration.yml" 0.16 ARUCO_MIP_36h12 Map1_Terrace</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+</Project>

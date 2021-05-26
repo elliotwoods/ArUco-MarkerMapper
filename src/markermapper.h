@@ -4,9 +4,7 @@
 #include <memory>
 #include <exception>
 #include <opencv2/core/core.hpp>
-#include <aruco/cameraparameters.h>
-#include <aruco/markerdetector.h>
-#include <aruco/markermap.h>
+#include <aruco.h>
 #include "marker_mapper_exports.h"
 #include "mapper_types.h"
 #include <thread>
